@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#030407">
+  <title>ECOGEN AI — Understand Your Impact</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="ECOGEN AI home"><span class="brand-mark">E</span><span>ECOGEN <b>AI</b><small>CARBON MADE CLEAR</small></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menu ☰</button>
+    <nav id="navLinks" class="nav-links" aria-label="Main navigation"><a href="#calculator">Calculator</a><a href="#report">Your report</a><a href="#how">How it works</a><a class="nav-cta" href="#calculator">Start estimate ↗</a></nav>
+  </header>
+  <main>
+    <section class="hero wrap" id="home">
+      <div class="hero-copy"><p class="eyebrow"><span class="pulse"></span> YOUR EVERYDAY CLIMATE DASHBOARD</p><h1>Small choices.<br><span>Clearer impact.</span></h1><p class="hero-text">Understand the estimated carbon impact of your everyday activities. No complicated science. Just clear numbers, simple graphs, and practical next steps.</p><div class="hero-actions"><a class="button button-lime" href="#calculator">Calculate my footprint <span>↗</span></a><a class="text-link" href="#how">How it works ↓</a></div><p class="micro-note">Estimates only · Sample factors are illustrative, not verified local emission factors.</p></div>
+      <div class="hero-visual" aria-label="Decorative carbon impact illustration"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-core"><span class="core-leaf">✳</span><strong>MAKE<br>IT COUNT</strong><small>ONE STEP AT A TIME</small></div><div class="float-chip chip-top"><span class="chip-dot"></span> Measure</div><div class="float-chip chip-bottom"><span class="chip-dot lime"></span> Improve</div></div>
+    </section>
+    <section class="section wrap" id="calculator">
+      <div class="section-heading"><div><p class="eyebrow">01 / YOUR ACTIVITIES</p><h2>Build your footprint</h2><p class="section-copy">Enter what you know. Leave unknown fields blank. Results will clearly show which estimates are included.</p></div><span class="section-tag">~ 2 MINUTES</span></div>
+      <form id="footprintForm" novalidate>
+        <div class="input-layout">
+          <article class="input-card"><div class="card-heading"><span class="icon-box">↗</span><div><h3>Transportation</h3><p>Distance travelled in a typical week</p></div></div>
+            <div class="field-grid"><div class="field"><label for="carKm">Car <span>(km/week)</span></label><input id="carKm" type="number" min="0" step="any" placeholder="e.g. 40"></div><div class="field"><label for="bikeKm">Motorcycle / scooter <span>(km/week)</span></label><input id="bikeKm" type="number" min="0" step="any" placeholder="e.g. 60"></div><div class="field full"><label for="busKm">Bus <span>(passenger-km/week)</span></label><input id="busKm" type="number" min="0" step="any" placeholder="e.g. 25"><small>Enter the distance you travel as a passenger.</small></div></div>
+          </article>
+          <article class="input-card"><div class="card-heading"><span class="icon-box">ϟ</span><div><h3>Home energy</h3><p>Electricity and cooking fuel</p></div></div>
+            <div class="field"><label for="electricityKwh">Electricity <span>(kWh/week)</span></label><input id="electricityKwh" type="number" min="0" step="any" placeholder="e.g. 25"><small>Use your bill's kWh value if you know it.</small></div>
+            <div class="field"><label for="lpgDays">One LPG cylinder lasts <span>(days)</span></label><input id="lpgDays" type="number" min="1" step="1" placeholder="e.g. 30"><small>Domestic cylinder capacity defaults to 14.2 kg.</small></div>
+            <div class="field"><label for="lpgCapacity">Cylinder capacity <span>(kg)</span></label><input id="lpgCapacity" type="number" min="0.1" step="any" value="14.2"></div>
+          </article>
+          <article class="input-card"><div class="card-heading"><span class="icon-box">♻</span><div><h3>Household waste</h3><p>One simple mixed-waste estimate</p></div></div>
+            <div class="field"><label for="wasteKg">Total waste <span>(kg/week)</span></label><input id="wasteKg" type="number" min="0" step="any" placeholder="e.g. 5"><small>No need to separate plastic, rubber, paper, or food waste.</small></div>
+            <div class="field"><label for="wasteMethod">What usually happens to it?</label><select id="wasteMethod"><option value="unknown">Not sure / mixed methods</option><option value="collection">Collected / recycled / composted</option><option value="landfill">Mostly landfill / mixed disposal</option><option value="burning">Mostly openly burned</option></select><small>Waste factors vary a lot. The demo estimate is rough and must be replaced with a suitable local factor.</small></div>
+          </article>
+          <article class="input-card period-card"><div class="card-heading"><span class="icon-box">◷</span><div><h3>Report period</h3><p>Keep the comparison consistent</p></div></div><div class="field"><label for="period">Calculate for</label><select id="period"><option value="7">One week</option><option value="30">One month (30 days)</option><option value="365">One year (365 days)</option></select></div><div class="info-strip"><span>i</span><p>Your answers are treated as weekly activity and scaled to the selected reporting period.</p></div><div class="field"><label class="check-row" for="showDemo"><input type="checkbox" id="showDemo" checked><span>Use clearly labelled demo factors</span></label><small>Turn off to show only verified factors. This frontend currently has no verified factor database, so the result may be unavailable.</small></div></article>
+        </div>
+        <div class="form-actions"><p id="formMessage" class="form-message" role="status" aria-live="polite">Your entries stay in this page; no backend is connected yet.</p><div class="button-group"><button type="button" class="button button-outline" id="resetBtn">Reset</button><button type="submit" class="button button-lime">Calculate footprint <span>↗</span></button></div></div>
+      </form>
+    </section>
+    <section class="section report-section" id="report">
+      <div class="wrap"><div class="section-heading"><div><p class="eyebrow">02 / YOUR REPORT</p><h2>See the bigger picture</h2><p class="section-copy">Your overall estimate and the average per day update from your entered activities.</p></div><span class="section-tag">LIVE CALCULATION</span></div>
+        <div class="report-grid"><article class="total-card"><div class="total-top"><span class="eyebrow">OVERALL ESTIMATED EMISSIONS</span><span class="status-pill" id="resultStatus">WAITING FOR INPUT</span></div><div class="total-value" id="totalValue">— <span>kg CO₂e</span></div><p id="totalCaption" class="total-caption">Enter at least one activity and calculate to see your result.</p><div class="total-divider"></div><div class="averages"><div><small>DAILY AVERAGE</small><strong id="dailyAverage">—</strong><span>kg CO₂e / day</span></div><div><small>WEEKLY EQUIVALENT</small><strong id="weeklyAverage">—</strong><span>kg CO₂e / week</span></div></div></article>
+          <article class="chart-card"><div class="chart-title"><div><p class="eyebrow">YOUR BREAKDOWN</p><h3>Where it comes from</h3></div><span class="chart-mark">↗</span></div><div id="barChart" class="bar-chart"><div class="empty-chart">Your category graph will appear here after calculation.</div></div><p class="chart-footnote" id="chartFootnote">Only categories with a calculated estimate appear.</p></article>
+        </div>
+        <div class="report-lower"><article class="details-card"><div class="chart-title"><div><p class="eyebrow">TRANSPARENCY</p><h3>Calculation details</h3></div></div><div id="calculationDetails" class="details-list"><p class="empty-state">Your calculation details will appear here.</p></div></article><article class="coach-card"><div class="coach-top"><span class="coach-icon">✳</span><div><p class="eyebrow">YOUR NEXT STEP</p><h3>Make one change count</h3></div></div><p id="coachIntro">After you calculate, we’ll suggest practical ways to reduce the biggest estimated contributor.</p><button type="button" class="button button-outline" id="openSuggestionsBtn" disabled>View suggestions ↗</button><p class="tiny-disclaimer">Suggestions are guidance, not a guarantee of a specific reduction.</p></article></div>
+      </div>
+    </section>
+    <section class="section wrap" id="how"><div class="section-heading"><div><p class="eyebrow">03 / HOW IT WORKS</p><h2>Simple by design. Honest by default.</h2></div></div><div class="steps-grid"><article class="step"><span>01</span><h3>Tell us what you know</h3><p>Enter distances, electricity, LPG use, and total mixed waste. You don’t need technical knowledge.</p></article><article class="step"><span>02</span><h3>Calculate an estimate</h3><p>Activity is multiplied by an emission factor. Demo factors are labelled clearly and are not presented as verified local data.</p></article><article class="step"><span>03</span><h3>Choose your next step</h3><p>Read the graph, see the largest included category, and explore practical changes you can make.</p></article></div><div class="method-note"><span class="method-icon">i</span><div><strong>Important: this is a frontend demo.</strong><p>No n8n workflow or AI API is connected in this version. Values use simplified illustrative factors when demo mode is enabled. Replace them with traceable factors for any real-world reporting.</p></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><a class="brand" href="#home"><span class="brand-mark">E</span><span>ECOGEN <b>AI</b><small>CARBON MADE CLEAR</small></span></a><p>Estimates, not exact measurements. <span>Built to make climate information easier to understand.</span></p></div></footer>
+  <div class="modal-backdrop" id="suggestionModal" hidden><section class="suggestion-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription"><button class="modal-close" id="closeModalBtn" aria-label="Close suggestions">×</button><p class="eyebrow">YOUR PERSONAL ACTION PLAN</p><div class="dialog-symbol">✳</div><h2 id="modalTitle">Small changes can add up.</h2><p id="modalDescription" class="dialog-intro">Based on your current estimate, here are practical steps to consider.</p><div id="suggestionList" class="suggestion-list"></div><div class="dialog-footer"><p>Estimated benefits depend on your actual habits and local conditions. No guaranteed savings are claimed.</p><button class="button button-lime" id="doneModalBtn">Got it</button></div></section></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
